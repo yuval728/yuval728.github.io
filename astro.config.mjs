@@ -8,5 +8,5 @@ export default defineConfig({
   // adapter: github(),
   site: 'https://yuval728.github.io',
   // base: '/',
-  // output: 'static',
+  output: 'static',
 });
