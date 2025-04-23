@@ -10,7 +10,7 @@ const blog = await getContent("blog");
 const experience = await getContent("experience");
 ---
 
-<Layout title="AI Engineer Portfolio">
+<Layout title="Yuval's Portfolio">
   <Header />
 
   <main class="container mx-auto px-6">
@@ -60,42 +60,38 @@ const experience = await getContent("experience");
     <!-- About Section -->
     <section id="about" class="py-20">
       <div class="max-w-4xl mx-auto">
-        <h2
-          class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white"
-        >
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">
           About Me
         </h2>
 
+        <!-- About Content -->
         <div
-          class="prose max-w-none dark:prose-invert prose-h1:text-gray-900 prose-h2:text-gray-800 prose-p:text-gray-600 dark:prose-h1:text-white dark:prose-h2:text-gray-100 dark:prose-p:text-gray-300"
+          class="prose max-w-none dark:prose-invert prose-h1:text-gray-900 prose-h2:text-gray-800 prose-p:text-gray-600 dark:prose-h1:text-white dark:prose-h2:text-gray-100 dark:prose-p:text-gray-300 mb-8"
           set:html={about.html}
-        />
-        <!-- Render skills from metadata -->
-        <div>
+        ></div>
+
+        <!-- Highlighted Skills Section -->
+        <div class="mt-8">
           <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
             💻 Technical Skills
           </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {
-              Object.entries(about.metadata.skills).map(([category, items]) => (
-                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-6">
-                  <h4 class="font-semibold text-gray-900 dark:text-white mb-3">
-                    {category}
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    {items.map((item) => (
-                      <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))
-            }
+          <div class="space-y-4">
+            {Object.entries(about.metadata.skills).map(([category, items]) => (
+              <div>
+                <h4 class="font-semibold text-primary-700 dark:text-primary-300 mb-2">
+                  {category}:
+                </h4>
+                <p class="text-gray-600 dark:text-gray-400">
+                  {items.join(", ")}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
+
+    
 
     <!-- Experience Section -->
     <section id="experience" class="py-20">
