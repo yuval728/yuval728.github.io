@@ -7,6 +7,7 @@ const about = await getContent("about");
 const projects = await getContent("projects");
 const research = await getContent("research");
 const blog = await getContent("blog");
+const experience = await getContent("experience");
 ---
 
 <Layout title="AI Engineer Portfolio">
@@ -96,6 +97,31 @@ const blog = await getContent("blog");
       </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center">Experience</h2>
+        <div class="space-y-8">
+          {experience.metadata.jobs.map((job) => (
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-semibold mb-2">{job.title}</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <strong>{job.company}</strong> - {job.location}
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {job.startDate} - {job.endDate || "Present"}
+              </p>
+              <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+                {job.responsibilities.map((responsibility) => (
+                  <li>{responsibility}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="py-20">
       <h2 class="text-3xl font-bold mb-8">Featured Projects</h2>
@@ -103,11 +129,11 @@ const blog = await getContent("blog");
         {
           projects.metadata.projects.map((project) => (
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
+              {/* <img
                 src={project.image}
                 alt={project.title}
                 class="w-full h-48 object-cover"
-              />
+              /> */}
               <div class="p-6">
                 <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-4">
@@ -171,7 +197,7 @@ const blog = await getContent("blog");
                     {new Date(post.date).toLocaleDateString()}
                   </span>
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`${post.link}`}
                     class="text-primary-600 hover:text-primary-700 font-medium"
                   >
                     Read More →
@@ -214,7 +240,8 @@ const blog = await getContent("blog");
         }
       </div>
     </section>
-     
+    
+    
 
     <!-- Contact Section -->
     <section id="contact" class="py-20">
