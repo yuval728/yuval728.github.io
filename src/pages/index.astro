@@ -190,7 +190,7 @@ const experience = await getContent("experience");
                 </p>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-gray-500 dark:text-gray-400">
-                    {new Date(post.date).toLocaleDateString()}
+                    {post.date}
                   </span>
                   <a
                     href={post.link}
