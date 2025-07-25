@@ -21,7 +21,7 @@ export async function getMediumPosts(): Promise<ParsedPost[]> {
   try {
     const feed = await parser.parseURL('https://medium.com/@yuvalmehta.728/feed');
     
-    return feed.items.slice(0, 10).map((item: any) => ({
+    return feed.items.slice(0, 12).map((item: any) => ({
       title: item.title || '',
       date: new Date(item.pubDate || Date.now()).toLocaleDateString('en-US', {
         year: 'numeric',
