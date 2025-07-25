@@ -2,11 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import { getContent } from "../lib/content";
+import { getMediumPosts } from "../lib/medium";
 
 const about = await getContent("about");
 const projects = await getContent("projects");
 const research = await getContent("research");
-const blog = await getContent("blog");
+const mediumPosts = await getMediumPosts();
 const experience = await getContent("experience");
 ---
 
@@ -173,7 +174,7 @@ const experience = await getContent("experience");
       <h2 class="text-3xl font-bold mb-8">Latest Blog Posts</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          blog.metadata.posts.map((post) => (
+          mediumPosts.map((post) => (
             <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
               <div class="p-6">
                 <h3 class="text-xl font-semibold mb-2">{post.title}</h3>
@@ -184,15 +185,14 @@ const experience = await getContent("experience");
                     </span>
                   ))}
                 </div>
-                <p class="text-gray-600 dark:text-gray-400 mb-4">
-                  {post.preview}
-                </p>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-gray-500 dark:text-gray-400">
-                    {new Date(post.date).toLocaleDateString()}
+                    {post.date}
                   </span>
                   <a
-                    href={`${post.link}`}
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="text-primary-600 hover:text-primary-700 font-medium"
                   >
                     Read More →
