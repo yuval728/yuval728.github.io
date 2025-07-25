@@ -29,7 +29,7 @@ export async function getMediumPosts(): Promise<ParsedPost[]> {
         month: 'numeric',
         day: 'numeric'
       }),
-      preview: (item.contentSnippet || item.content || item.description || 'No preview available').substring(0, 150) + '...',
+      preview: generatePreview(item),
       tags: item.categories || [],
       link: item.link || ''
     }));
@@ -53,4 +53,47 @@ export async function getMediumPosts(): Promise<ParsedPost[]> {
       }
     ];
   }
+}
+
+function generatePreview(item: any): string {
+  // Try to get content from various RSS fields
+  let content = item.contentSnippet || item.content || item.description || '';
+  
+  // Clean up HTML tags if present
+  content = content.replace(/<[^>]*>/g, '');
+  
+  // Clean up common RSS artifacts
+  content = content.replace(/&nbsp;/g, ' ');
+  content = content.replace(/&amp;/g, '&');
+  content = content.replace(/&lt;/g, '<');
+  content = content.replace(/&gt;/g, '>');
+  content = content.replace(/&quot;/g, '"');
+  
+  // Remove extra whitespace
+  content = content.replace(/\s+/g, ' ').trim();
+  
+  // If we still don't have content, generate based on title
+  if (!content || content.length < 20) {
+    const title = item.title || '';
+    if (title.toLowerCase().includes('machine learning') || title.toLowerCase().includes('ml')) {
+      content = 'Exploring the latest developments and practical applications in machine learning and artificial intelligence.';
+    } else if (title.toLowerCase().includes('ai') || title.toLowerCase().includes('artificial intelligence')) {
+      content = 'Deep dive into artificial intelligence technologies and their real-world impact across industries.';
+    } else if (title.toLowerCase().includes('data') || title.toLowerCase().includes('analytics')) {
+      content = 'Insights into data science methodologies and analytical approaches for modern challenges.';
+    } else if (title.toLowerCase().includes('deep learning') || title.toLowerCase().includes('neural')) {
+      content = 'Understanding deep learning architectures and their applications in solving complex problems.';
+    } else if (title.toLowerCase().includes('business') || title.toLowerCase().includes('strategy')) {
+      content = 'Strategic insights on how technology and AI are transforming business operations and decision-making.';
+    } else {
+      content = 'Exploring cutting-edge technology trends and their practical applications in the modern world.';
+    }
+  }
+  
+  // Ensure preview is appropriate length
+  if (content.length > 150) {
+    content = content.substring(0, 147) + '...';
+  }
+  
+  return content;
 }
