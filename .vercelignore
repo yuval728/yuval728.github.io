@@ -1,0 +1,5 @@
+src/pages
+src/layouts
+src/styles/global.css
+.astro
+astro.config.mjs (old config - project uses Next.js)
