@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Serif_Display, DM_Mono, Outfit } from 'next/font/google';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import './globals.css';
 
 const dmSerifDisplay = DM_Serif_Display({
@@ -102,6 +104,8 @@ export default function RootLayout({
       </head>
       <body className="overflow-x-hidden bg-background text-text-primary">
         {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

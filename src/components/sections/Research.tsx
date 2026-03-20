@@ -1,27 +1,10 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 export function Research() {
   return (
     <section id="research" className="relative py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          <p className="section-label mb-12">// research</p>
-        </motion.div>
+        <p className="section-label mb-12">// research</p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="rounded-xl border border-border/30 bg-surface/30 p-8"
-        >
+        <div className="rounded-xl border border-border/30 bg-surface/30 p-8">
           {/* Badge */}
           <div className="mb-4">
             <span className="inline-block rounded-full border border-accent-amber/50 bg-accent-amber/10 px-3 py-1 font-mono text-xs font-medium text-accent-amber">
@@ -41,7 +24,9 @@ export function Research() {
 
           {/* Abstract */}
           <p className="mt-6 font-sans text-sm leading-relaxed text-text-muted">
-            Explores multiple ML models for early diabetes prediction, highlighting key patterns in patient health data to aid proactive healthcare measures. Our research demonstrates the effectiveness of ensemble methods and feature engineering in medical diagnostics.
+            Explores multiple ML models for early diabetes prediction, highlighting key patterns
+            in patient health data to aid proactive healthcare measures. Our research demonstrates
+            the effectiveness of ensemble methods and feature engineering in medical diagnostics.
           </p>
 
           {/* Links */}
@@ -63,7 +48,7 @@ export function Research() {
               View Publication →
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

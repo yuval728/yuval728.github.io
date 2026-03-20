@@ -66,20 +66,21 @@ export function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative font-sans text-sm transition-colors ${
+                className={`group relative font-sans text-sm transition-colors ${
                   isActive(item.href)
                     ? 'text-text-primary'
                     : 'text-text-muted hover:text-text-primary'
                 }`}
               >
                 {item.label}
-                {isActive(item.href) && (
-                  <motion.div
-                    layoutId="underline"
-                    className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent-blue"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
+                {/* Hover underline (always present, opacity-driven) */}
+                <span
+                  className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-accent-blue transition-transform duration-300 ${
+                    isActive(item.href)
+                      ? 'scale-x-100'
+                      : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
               </Link>
             ))}
           </div>
