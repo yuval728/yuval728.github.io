@@ -21,7 +21,7 @@ export async function sendContactEmail(formData: {
     const result = await resend.emails.send({
       from: 'noreply@yuval728.vercel.app',
       to: 'yuvalmehta.728@gmail.com',
-      replyTo: formData.email,
+      reply_to: formData.email,
       subject: `Portfolio Inquiry from ${formData.name}`,
       html: `
         <h2>New Portfolio Inquiry</h2>
