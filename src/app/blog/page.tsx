@@ -4,7 +4,7 @@ import { Footer } from '@/components/ui/Footer';
 import { BlogPageClient } from '@/app/blog/BlogPageClient';
 
 export default async function BlogPage() {
-  const posts = await fetchMediumPosts();
+  const posts = await fetchMediumPosts(6);
 
   return (
     <>
