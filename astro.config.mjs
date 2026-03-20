@@ -1,13 +1,3 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-// import github from '@astrojs/github';
-
-export default defineConfig({
-  integrations: [tailwind(), mdx(), sitemap()],
-  // adapter: github(),
-  site: 'https://yuval728.github.io',
-  // base: '/',
-  output: 'static',
-});
+// This file is intentionally empty - project has been migrated to Next.js 14
+// See next.config.js, tailwind.config.ts, and src/app/ directory for Next.js configuration
+export default {};
