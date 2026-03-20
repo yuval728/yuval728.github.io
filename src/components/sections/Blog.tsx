@@ -38,7 +38,7 @@ export async function Blog() {
           className="mt-8"
         >
           <a
-            href={`https://medium.com/@yuvalmehta.728`}
+            href={`https://medium.com/@3ec8787f291f`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-sans font-medium text-accent-blue hover:underline"

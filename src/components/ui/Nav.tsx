@@ -49,7 +49,7 @@ export function Nav() {
   };
 
   return (
-    <nav className="fixed top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md">
+    <nav className="fixed top-0 z-40 w-full border-b border-white/5 bg-black/60 backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}

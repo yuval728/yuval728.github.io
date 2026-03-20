@@ -30,7 +30,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden pt-32"
+      className="relative min-h-screen w-full overflow-hidden pt-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -46,7 +46,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h1 className="text-balance font-display text-5xl font-normal tracking-tight text-text-primary sm:text-6xl lg:text-7xl">
+              <h1 className="text-balance font-display text-6xl font-normal text-text-primary sm:text-6xl lg:text-7xl" style={{ letterSpacing: '-0.02em' }}>
                 Yuval Mehta
               </h1>
             </motion.div>

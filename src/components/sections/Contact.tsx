@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { CONFIG } from '@/data/config';
+import { sendContactEmail } from '@/app/actions/contact';
 
 export function Contact() {
   const [formState, setFormState] = useState({
@@ -12,6 +13,7 @@ export function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | ''>('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,23 +25,39 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage('');
+    setSubmitStatus('');
 
     try {
-      // Fallback to mailto since Resend requires API key setup
-      const mailtoLink = `mailto:${CONFIG.email}?subject=Portfolio Inquiry from ${formState.name}&body=${encodeURIComponent(
-        `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
-      )}`;
+      const result = await sendContactEmail(formState);
 
-      window.location.href = mailtoLink;
-      setSubmitMessage('Opening email client...');
-
-      setTimeout(() => {
+      if (result.success) {
+        setSubmitMessage(result.message);
+        setSubmitStatus('success');
         setFormState({ name: '', email: '', message: '' });
-        setSubmitMessage('');
-        setIsSubmitting(false);
-      }, 1500);
+        setTimeout(() => {
+          setSubmitMessage('');
+          setSubmitStatus('');
+        }, 3000);
+      } else {
+        // Fallback to mailto
+        const mailtoLink = `mailto:${CONFIG.email}?subject=Portfolio Inquiry from ${formState.name}&body=${encodeURIComponent(
+          `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
+        )}`;
+        window.location.href = mailtoLink;
+        setSubmitMessage('Opening email client...');
+        setSubmitStatus('success');
+        setTimeout(() => {
+          setSubmitMessage('');
+          setSubmitStatus('');
+          setIsSubmitting(false);
+        }, 1500);
+        return;
+      }
     } catch (error) {
       setSubmitMessage('Error sending message. Please try again.');
+      setSubmitStatus('error');
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -206,7 +224,11 @@ export function Contact() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-center font-sans text-sm text-accent-green"
+                  className={`text-center font-sans text-sm ${
+                    submitStatus === 'success'
+                      ? 'text-accent-green'
+                      : 'text-red-400'
+                  }`}
                 >
                   {submitMessage}
                 </motion.p>

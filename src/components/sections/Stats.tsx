@@ -3,26 +3,6 @@
 import { motion } from 'framer-motion';
 import { CONFIG } from '@/data/config';
 
-const achievements = [
-  {
-    icon: '🏆',
-    title: 'Ranked 274th / 74,824',
-    description:
-      'Top 1% globally in Amazon ML Challenge 2024',
-  },
-  {
-    icon: '📄',
-    title: 'IEEE APCIT 2024',
-    description: 'Published research on Early Diabetes Prediction',
-  },
-  {
-    icon: '⚡',
-    title: '+30% throughput',
-    description:
-      'Video processing optimization via GNNs and autoencoders',
-  },
-];
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -78,7 +58,7 @@ export function Stats() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {achievements.map((achievement, idx) => (
+          {CONFIG.achievements.map((achievement, idx) => (
             <motion.div
               key={idx}
               className="flex gap-4 rounded-lg border border-border/50 bg-surface/30 p-6"
