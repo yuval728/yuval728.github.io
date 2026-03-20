@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'DM Serif Display';
+  src: url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url('https://fonts.googleapis.com/css2?family=DM+Mono&display=swap');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+}
+
+@layer base {
+  :root {
+    --color-background: 10 10 15;
+    --color-surface: 17 17 24;
+    --color-surface-elevated: 26 26 36;
+    --color-border: 255 255 255 / 0.07;
+    --color-text-primary: 240 240 245;
+    --color-text-muted: 240 240 245 / 0.45;
+    --color-accent-blue: 10 132 255;
+    --color-accent-green: 48 209 88;
+    --color-accent-amber: 255 159 10;
+    --color-accent-purple: 191 90 242;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-text-primary;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-blue to-accent-green bg-clip-text text-transparent;
+  }
+
+  .button-primary {
+    @apply rounded-lg bg-accent-blue px-6 py-2.5 font-sans font-medium text-background transition-all hover:opacity-90 active:scale-95;
+  }
+
+  .button-ghost {
+    @apply rounded-lg border border-border px-6 py-2.5 font-sans font-medium text-text-primary transition-all hover:border-accent-blue hover:text-accent-blue active:scale-95;
+  }
+
+  .section-label {
+    @apply font-mono text-sm font-medium text-accent-blue;
+  }
+
+  .stat-card {
+    @apply rounded-xl border border-border bg-surface p-6;
+  }
+
+  .skill-pill {
+    @apply inline-block rounded-full border border-border px-3 py-1.5 font-mono text-sm transition-all hover:scale-105;
+  }
+}

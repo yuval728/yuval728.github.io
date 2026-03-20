@@ -1,52 +1,77 @@
-import Parser from 'rss-parser';
+import { CONFIG } from '@/data/config';
 
 interface MediumPost {
   title: string;
   link: string;
   pubDate: string;
-  contentSnippet: string;
   categories: string[];
 }
 
-interface ParsedPost {
-  title: string;
-  date: string;
-  tags: string[];
-  link: string;
-}
-
-const parser = new Parser();
-
-export async function getMediumPosts(): Promise<ParsedPost[]> {
+export async function fetchMediumPosts(): Promise<MediumPost[]> {
   try {
-    const feed = await parser.parseURL('https://medium.com/@yuvalmehta.728/feed');
-    
-    return feed.items.slice(0, 15).map((item: any) => ({
-      title: item.title || '',
-      date: new Date(item.pubDate || Date.now()).toLocaleDateString('en-US', {
+    const response = await fetch(
+      `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${CONFIG.medium}`,
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch Medium posts');
+    }
+
+    const data = await response.json();
+
+    if (!data.items) {
+      return getFallbackPosts();
+    }
+
+    return data.items.slice(0, 5).map((item: any) => ({
+      title: item.title,
+      link: item.link,
+      pubDate: new Date(item.pubDate).toLocaleDateString('en-US', {
         year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
+        month: 'short',
       }),
-      tags: item.categories || [],
-      link: item.link || ''
+      categories: item.categories || [],
     }));
   } catch (error) {
     console.error('Error fetching Medium posts:', error);
-    // Fallback to static posts if RSS feed fails
-    return [
-      {
-        title: "The Silent Backbone Why Traditional Machine Learning Still Matters in the AI Era",
-        date: "4/22/2025",
-        tags: ["Machine Learning", "AI", "Data Science"],
-        link: "https://medium.com/towards-artificial-intelligence/the-silent-backbone-why-traditional-machine-learning-still-matters-in-the-ai-era-22235586420a"
-      },
-      {
-        title: "The Rise of Intelligent Enterprises AI at the Heart of Business Strategy",
-        date: "4/11/2025",
-        tags: ["AI", "Business Strategy", "Innovation"],
-        link: "https://medium.com/towards-artificial-intelligence/the-rise-of-intelligent-enterprises-ai-at-the-heart-of-business-strategy-ab58276235ba"
-      }
-    ];
+    return getFallbackPosts();
   }
+}
+
+function getFallbackPosts(): MediumPost[] {
+  return [
+    {
+      title: 'Scaling Laws in AI: Why Bigger Models Work in Research but Break in Production',
+      link: 'https://medium.com/@3ec8787f291f',
+      pubDate: 'Sep 2025',
+      categories: ['AI', 'ML', 'Scale'],
+    },
+    {
+      title: 'Agentic Patterns: The Building Blocks of Reliable AI Agents',
+      link: 'https://medium.com/@3ec8787f291f',
+      pubDate: 'Aug 2025',
+      categories: ['AI', 'Agents'],
+    },
+    {
+      title: 'Fine-Tuning LLMs in 2025: Techniques, Trade-offs, and Use Cases',
+      link: 'https://medium.com/@3ec8787f291f',
+      pubDate: 'May 2025',
+      categories: ['LLM', 'ML'],
+    },
+    {
+      title: 'Machine Learning at Scale: Why PySpark MLlib Still Wins in 2025',
+      link: 'https://medium.com/@3ec8787f291f',
+      pubDate: 'Jul 2025',
+      categories: ['BigData', 'ML'],
+    },
+    {
+      title: 'How to Build Bulletproof Data Pipelines with PySpark',
+      link: 'https://medium.com/@3ec8787f291f',
+      pubDate: 'Jul 2025',
+      categories: ['BigData', 'Data'],
+    },
+  ];
 }
