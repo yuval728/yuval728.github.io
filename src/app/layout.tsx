@@ -77,6 +77,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSerifDisplay.variable} ${dmMono.variable} ${outfit.variable}`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head>
         <script

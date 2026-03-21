@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -15,8 +16,15 @@ const navItems = [
 export function Nav() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Only observe sections if we're on the home page
+    if (pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
     const observerOptions = {
       threshold: 0.3,
       rootMargin: '-100px 0px -66% 0px',
@@ -39,9 +47,14 @@ export function Nav() {
     sections.forEach((section) => observer.observe(section));
 
     return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
+  }, [pathname]);
 
   const isActive = (href: string) => {
+    // If we're on a non-home page
+    if (pathname !== '/') {
+      return pathname === href;
+    }
+    // If we're on home page
     if (href.startsWith('#')) {
       return activeSection === href.slice(1);
     }
