@@ -2,47 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { SkillBadge } from '@/components/ui/SkillBadge';
-
-const skillCategories = [
-  {
-    name: 'ML/DL',
-    color: 'text-accent-blue border-accent-blue/30 bg-accent-blue/5',
-    skills: [
-      'PyTorch', 'TensorFlow', 'Keras', 'Scikit-learn', 'XGBoost',
-      'OpenCV', 'Transformers', 'NLTK', 'spaCy', 'LightGBM',
-    ],
-  },
-  {
-    name: 'AI Agents',
-    color: 'text-accent-green border-accent-green/30 bg-accent-green/5',
-    skills: ['LangChain', 'LangGraph', 'CrewAI', 'A2A', 'MCP', 'LlamaIndex'],
-  },
-  {
-    name: 'MLOps & Cloud',
-    color: 'text-accent-amber border-accent-amber/30 bg-accent-amber/5',
-    skills: ['MLflow', 'Docker', 'W&B', 'DVC', 'AWS', 'GCP', 'Azure', 'CI/CD', 'ONNX'],
-  },
-  {
-    name: 'Languages',
-    color: 'text-accent-purple border-accent-purple/30 bg-accent-purple/5',
-    skills: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'C', 'C++', 'Java'],
-  },
-  {
-    name: 'Databases',
-    color: 'text-text-muted border-text-muted/30',
-    skills: ['MySQL', 'MongoDB', 'PostgreSQL', 'Supabase', 'Redis', 'Pinecone', 'ChromaDB', 'FAISS', 'SQLite'],
-  },
-  {
-    name: 'Web',
-    color: 'text-text-muted border-text-muted/30',
-    skills: ['FastAPI', 'Django', 'Flask', 'Streamlit', 'Node.js', 'Express.js'],
-  },
-  {
-    name: 'Big Data',
-    color: 'text-text-muted border-text-muted/30',
-    skills: ['PySpark', 'Apache Spark'],
-  },
-];
+import { CONFIG } from '@/data/config';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -74,13 +34,13 @@ export function Skills() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {skillCategories.map((category) => (
+          {CONFIG.skills.map((category) => (
             <motion.div key={category.name} variants={itemVariants}>
               <h3 className="mb-4 font-mono text-xs font-medium uppercase tracking-widest text-text-muted">
                 {category.name}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
+                {category.items.map((skill) => (
                   <SkillBadge key={skill} name={skill} colorClass={category.color} />
                 ))}
               </div>

@@ -83,11 +83,10 @@ export function Contact() {
             viewport={{ once: true, margin: '-100px' }}
           >
             <h2 className="font-display text-4xl font-normal text-text-primary">
-              Let's build something.
+              {CONFIG.contact.title}
             </h2>
             <p className="mt-4 font-sans text-text-muted">
-              Open to full-time roles, research collaborations, and freelance
-              AI/ML projects.
+              {CONFIG.contact.description}
             </p>
 
             <div className="mt-8 space-y-4">
