@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -17,6 +17,7 @@ export function Nav() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     // Only observe sections if we're on the home page
@@ -61,6 +62,15 @@ export function Nav() {
     return false;
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's a hash link from a non-home page, navigate to home first then scroll
+    if (href.startsWith('#') && pathname !== '/') {
+      e.preventDefault();
+      router.push('/' + href);
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <nav className="fixed top-0 z-40 w-full border-b border-white/5 bg-black/60 backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -79,6 +89,7 @@ export function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`group relative font-sans text-sm transition-colors ${
                   isActive(item.href)
                     ? 'text-text-primary'
@@ -139,7 +150,10 @@ export function Nav() {
                     key={item.href}
                     href={item.href}
                     className="font-sans text-sm text-text-muted transition-colors hover:text-text-primary"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      handleNavClick(e, item.href);
+                      setMobileMenuOpen(false);
+                    }}
                   >
                     {item.label}
                   </Link>
