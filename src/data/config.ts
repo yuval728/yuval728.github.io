@@ -219,6 +219,14 @@ export const CONFIG = {
 
   projects: [
     {
+      name: 'AQI Prediction',
+      description: 'Dual-view attention model forecasting AQI and 6 pollutants with 93% R² accuracy. Reduced cloud training cost by 35% via automated sweeps.',
+      github: 'https://github.com/yuval728/AQI_predictor',
+      demo: '',
+      tags: ['PyTorch', 'GCP', 'WandB', 'FastAPI', 'MLOps'],
+      pinned: true,
+    },
+    {
       name: 'AI Therapist',
       description: 'LLM-powered therapy agent with emotion control and persistent memory — 70% session consistency improvement, 52% empathy alignment via feedback-driven tuning.',
       github: 'https://github.com/yuval728',
@@ -240,14 +248,6 @@ export const CONFIG = {
       github: 'https://github.com/Yuval728/VerbalVision',
       demo: '',
       tags: ['PyTorch', 'OpenCV', 'TorchServe', 'MLflow', 'Docker'],
-      pinned: true,
-    },
-    {
-      name: 'AQI Prediction',
-      description: 'Dual-view attention model forecasting AQI and 6 pollutants with 93% R² accuracy. Reduced cloud training cost by 35% via automated sweeps.',
-      github: 'https://github.com/yuval728/AQI_predictor',
-      demo: '',
-      tags: ['PyTorch', 'GCP', 'WandB', 'FastAPI', 'MLOps'],
       pinned: true,
     },
     {

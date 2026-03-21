@@ -26,14 +26,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yuval728.vercel.app'),
+  metadataBase: new URL('https://yuvalmehta.vercel.app'),
   title: {
-    default: 'Yuval Mehta | AI/ML Engineer',
+    default: 'Yuval Mehta | Generative AI Engineer',
     template: '%s | Yuval Mehta',
   },
   description:
-    'AI/ML Engineer from Mumbai. Top 1% Amazon ML Challenge 2024. IEEE published. Specializing in LangGraph agents, computer vision, and MLOps.',
+    'Versatile AI Engineer from Mumbai. Top 1% Amazon ML Challenge 2024. IEEE published. Specializing in LangGraph agents, computer vision, and MLOps.',
   keywords: [
+    'Generative AI Engineer',
     'AI Engineer',
     'ML Engineer',
     'LangGraph',
@@ -46,22 +47,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://yuval728.vercel.app',
+    url: 'https://yuvalmehta.vercel.app',
     siteName: 'Yuval Mehta',
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'Yuval Mehta — AI/ML Engineer',
+        alt: 'Yuval Mehta — Generative AI Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Yuval Mehta | AI/ML Engineer',
+    title: 'Yuval Mehta | Generative AI Engineer',
     description:
-      'AI/ML Engineer. Top 1% Amazon ML Challenge. IEEE published.',
+      'Generative AI Engineer. Top 1% Amazon ML Challenge. IEEE published.',
     images: ['/og.png'],
   },
   robots: { index: true, follow: true },
@@ -87,8 +88,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Yuval Mehta',
-              jobTitle: 'AI/ML Engineer',
-              url: 'https://yuval728.vercel.app',
+              jobTitle: 'Generative AI Engineer',
+              url: 'https://yuvalmehta.vercel.app',
               email: 'yuvalmehta.728@gmail.com',
               address: {
                 '@type': 'PostalAddress',
