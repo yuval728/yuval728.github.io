@@ -68,6 +68,13 @@ export function Nav() {
       e.preventDefault();
       router.push('/' + href);
       setMobileMenuOpen(false);
+    } else if (href.startsWith('#') && pathname === '/') {
+      // Same-page smooth scroll
+      e.preventDefault();
+      const target = document.getElementById(href.slice(1));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
